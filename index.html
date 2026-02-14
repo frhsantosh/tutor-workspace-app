@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutor Workspace</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header>
+        <h1>Tutor Workspace</h1>
+        <p>Organize student chats, chapter material, and AI outputs in one place.</p>
+      </header>
+
+      <section class="panel" id="student-panel">
+        <h2>Students</h2>
+        <form id="student-form" class="inline-form">
+          <input id="student-name" type="text" placeholder="Student name" required />
+          <button type="submit">Add</button>
+        </form>
+        <div id="student-list" class="list"></div>
+      </section>
+
+      <section class="panel hidden" id="workspace-panel">
+        <div class="workspace-header">
+          <h2 id="workspace-title"></h2>
+          <button id="delete-student" class="danger">Delete student</button>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="books">Books & Chapters</button>
+          <button class="tab" data-tab="notes">AI Notes</button>
+          <button class="tab" data-tab="answers">Exercise Answers</button>
+          <button class="tab" data-tab="custom">Custom Exercises</button>
+        </div>
+
+        <section class="tab-panel" id="books-tab">
+          <form id="book-form" class="inline-form">
+            <input id="book-title" type="text" placeholder="Book title" required />
+            <button type="submit">Add book</button>
+          </form>
+          <div id="book-list" class="list"></div>
+        </section>
+
+        <section class="tab-panel hidden" id="notes-tab">
+          <h3>Chapter Summary Notes</h3>
+          <form id="notes-form" class="stack-form">
+            <select id="notes-chapter" required></select>
+            <textarea id="notes-content" rows="5" placeholder="Paste ChatGPT summary notes" required></textarea>
+            <button type="submit">Save notes</button>
+          </form>
+          <div id="notes-list" class="list"></div>
+        </section>
+
+        <section class="tab-panel hidden" id="answers-tab">
+          <h3>Exercise Answers</h3>
+          <form id="answers-form" class="stack-form">
+            <select id="answers-chapter" required></select>
+            <textarea id="answers-content" rows="5" placeholder="Paste end-of-chapter answers" required></textarea>
+            <button type="submit">Save answers</button>
+          </form>
+          <div id="answers-list" class="list"></div>
+        </section>
+
+        <section class="tab-panel hidden" id="custom-tab">
+          <h3>Custom Exercises + Answers</h3>
+          <form id="custom-form" class="stack-form">
+            <select id="custom-chapter" required></select>
+            <textarea id="custom-content" rows="5" placeholder="Paste custom exercises and answers" required></textarea>
+            <button type="submit">Save custom set</button>
+          </form>
+          <div id="custom-list" class="list"></div>
+        </section>
+      </section>
+    </main>
+
+    <template id="book-template">
+      <article class="card">
+        <div class="card-header">
+          <h3></h3>
+          <button class="danger small delete-book">Delete</button>
+        </div>
+        <form class="inline-form chapter-form">
+          <input type="text" placeholder="Chapter name" required />
+          <button type="submit">Add chapter</button>
+        </form>
+        <div class="chapter-list"></div>
+      </article>
+    </template>
+
+    <template id="chapter-template">
+      <article class="sub-card">
+        <div class="card-header">
+          <h4></h4>
+          <button class="danger small delete-chapter">Delete</button>
+        </div>
+        <form class="stack-form image-form">
+          <textarea rows="3" placeholder="Paste page image URLs, one per line"></textarea>
+          <button type="submit">Save page image links</button>
+        </form>
+        <ul class="image-links"></ul>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
